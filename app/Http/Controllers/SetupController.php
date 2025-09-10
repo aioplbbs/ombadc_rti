@@ -55,4 +55,11 @@ class SetupController extends Controller
 
         return redirect()->back()->with('success', 'Environment file updated successfully!');
     }
+
+    public function migrate()
+    {
+        Artisan::call('migrate');
+        echo "Migrated Successfully";
+        exit();
+    }
 }

@@ -37,6 +37,24 @@
                   </a>
               </li>
 
+                @can('view rti')
+                <li class="side-nav-item">
+                    <a href="{{route('rti.index')}}" class="side-nav-link">
+                        <span class="menu-icon"><i class="ri-dashboard-3-line"></i></span>
+                        <span class="menu-text"> Show RTI Filled</span>
+                    </a>
+                </li>
+                @endcan
+                
+                @can('create rti')
+                <li class="side-nav-item">
+                    <a href="{{route('rti.create')}}" class="side-nav-link">
+                        <span class="menu-icon"><i class="ri-dashboard-3-line"></i></span>
+                        <span class="menu-text"> Apply RTI </span>
+                    </a>
+                </li>
+                @endcan
+
               <li class="side-nav-title">Admin Section</li>
 
               @can('view user')

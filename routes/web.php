@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\RtiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Http\Controllers\RolesController;
 
 Route::get('/', [SetupController::class, 'index']);
 Route::post('/setup', [SetupController::class, 'create'])->name('setup.init');
+Route::get('/setup/migrate', [SetupController::class, 'migrate']);
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -27,5 +29,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     Route::resource('/permission', PermissionController::class);
     Route::post('/permission/assign', [PermissionController::class, 'permissionToRoll'])->name('permission.assign');
     Route::resource('/roles', RolesController::class);
-    Route::resource('/report', ReportController::class);
+    Route::resource('/rti', RtiController::class);
 });
