@@ -25,11 +25,12 @@
                             <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{$value->full_name}}</td>
-                                <td>{{$value->permanent_address}}</td>
-                                <td>{{$value->request_information}}</td>
+                                <td>{{$value->full_address}}</td>
+                                <td>{{$value->request_information['subject']}}</td>
                                 <td>{{$value->status}}</td>
                                 <td>
-                                    
+                                    <a href="{{route('rti.show', $value->id)}}" class="fs-20 p-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View RTI"> <i class="text-primary ri-mac-line"></i></a>
+                                    <a href="{{route('rti.respond.index', $value->id)}}" class="fs-20 p-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Respond To this RTI"> <i class="text-primary ri-mail-send-fill"></i></a>
                                 </td>
                             </tr>
                             @endforeach

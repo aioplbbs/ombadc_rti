@@ -19,14 +19,14 @@
                     </div>
                     <div class="col-md-4">
                         <div class="mb-2">
-                            <label class="form-check-label" for="customRadio3">Name of the</label> 
+                            <label class="form-check-label">Name of the</label> 
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="customRadio3" name="customRadio1" value="Father" class="form-check-input">
-                                <label class="form-check-label" for="customRadio3">Father</label>
+                                <input type="radio" id="gardian_type1" name="gardian_type" value="Father" class="form-check-input" {{ old('gardian_type') == 'Father' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="gardian_type1">Father</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="customRadio4" name="customRadio1" value="Husband" class="form-check-input">
-                                <label class="form-check-label" for="customRadio4">Husband</label>
+                                <input type="radio" id="gardian_type2" name="gardian_type" value="Husband" class="form-check-input" {{ old('gardian_type') == 'Husband' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="gardian_type2">Husband</label>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -35,8 +35,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Particulars in respect of Identity of the applicant</label>
-                            <input type="text" id="name" name="domain" class="form-control" value="{{old('domain')}}" placeholder="Enter Aadhaar No./ Passport/ Voter">
+                            <label for="identity" class="form-label">Particulars in respect of Identity of the applicant</label>
+                            <input type="text" id="identity" name="identity" class="form-control" value="{{old('identity')}}" placeholder="Enter Aadhaar No./ Passport/ Voter">
                         </div>
                     </div>
                     <div class="col-md-12 mb-2">
@@ -74,11 +74,11 @@
                         <div class="mb-3">
                             <label for="full_name" class="form-label">Has the information been provided earlier?</label> <br>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="is_info_given1" name="is_info_given" value="1" class="form-check-input">
+                                <input type="radio" id="is_info_given1" name="is_info_given" value="1" class="form-check-input" {{ old('is_info_given') == '1' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_info_given1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="is_info_given2" name="is_info_given" value="0" class="form-check-input">
+                                <input type="radio" id="is_info_given2" name="is_info_given" value="0" class="form-check-input" {{ old('is_info_given') == '0' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_info_given2">No</label>
                             </div>
                         </div>
@@ -87,11 +87,11 @@
                         <div class="mb-3">
                             <label for="full_name" class="form-label">Is this information not made available by the Public authority?</label> <br>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="info_by_authority1" name="info_by_authority" value="1" class="form-check-input">
+                                <input type="radio" id="info_by_authority1" name="info_by_authority" value="1" class="form-check-input" {{ old('info_by_authority') == '1' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="info_by_authority1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="info_by_authority2" name="info_by_authority" value="0" class="form-check-input">
+                                <input type="radio" id="info_by_authority2" name="info_by_authority" value="0" class="form-check-input" {{ old('info_by_authority') == '0' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="info_by_authority2">No</label>
                             </div>
                         </div>
@@ -100,11 +100,11 @@
                         <div class="mb-3">
                             <label for="full_name" class="form-label">Have you deposited application fee?</label> <br>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="application_fee1" name="application_fee" value="1" class="form-check-input">
+                                <input type="radio" id="application_fee1" name="application_fee" value="1" class="form-check-input" {{ old('application_fee') == '1' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="application_fee1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="application_fee2" name="application_fee" value="0" class="form-check-input">
+                                <input type="radio" id="application_fee2" name="application_fee" value="0" class="form-check-input" {{ old('application_fee') == '0' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="application_fee2">No</label>
                             </div>
                         </div>
@@ -114,11 +114,11 @@
                         <div class="mb-3">
                             <label for="full_name" class="form-label">Whether belongs to BPL category?</label> <br>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="is_bpl1" name="is_bpl" value="1" class="form-check-input">
+                                <input type="radio" id="is_bpl1" name="is_bpl" value="1" class="form-check-input" {{ old('is_bpl') == '1' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_bpl1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" id="is_bpl2" name="is_bpl" value="0" class="form-check-input">
+                                <input type="radio" id="is_bpl2" name="is_bpl" value="0" class="form-check-input" {{ old('is_bpl') == '0' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_bpl2">No</label>
                             </div>
                         </div>
@@ -127,6 +127,45 @@
                         <div class="mb-3">
                             <label for="application_fee_challan" class="form-label">Application fee Challan No.</label>
                             <input type="text" id="application_fee_challan" name="application_fee_challan" class="form-control" value="{{old('application_fee_challan')}}" placeholder="Enter Challan No.">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <h4>Permanent Address</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="address1" class="form-label">Address 1</label>
+                            <input type="text" id="address1" name="address1" class="form-control" value="{{old('address1')}}" placeholder="Enter Address 1">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="address2" class="form-label">Address 2</label>
+                            <input type="text" id="address2" name="address2" class="form-control" value="{{old('address2')}}" placeholder="Enter Address 2">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="pincode" class="form-label">Pincode</label>
+                            <input type="text" id="pincode" name="pincode" class="form-control" value="{{old('pincode')}}" placeholder="Enter Pincode">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" id="city" name="city" class="form-control" value="{{old('city')}}" placeholder="Enter City">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="state" class="form-label">State</label>
+                            <input type="text" id="state" name="state" class="form-control" value="{{old('state')}}" placeholder="Enter State">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" id="country" name="country" class="form-control" value="INDIA" placeholder="Enter Country" disabled>
                         </div>
                     </div>
                     <div class="col-md-12 mb-2">
@@ -153,4 +192,18 @@
             </div> <!-- end card body-->
         </div> <!-- end card -->
     </div>
+
+    @push('script')
+    <script>
+        $("#pincode").on("change", function() {
+            var d = $(this).val();
+            $.post( "{{url('ajax/pincode')}}", {pincode: d}, function( data ) {
+                console.log(data);
+                $("#city").val(data.city);
+                $("#state").val(data.state);
+            });
+            
+        });
+    </script>
+    @endpush
 </x-app-layout>

@@ -20,6 +20,7 @@ class CreateRtisTable extends Migration
             $table->enum('gardian_type', ['Father', 'Husband']);
             $table->string('gardian_name', 50);
             $table->text('permanent_address');
+            $table->string('identity', 20)->nullable()->comment('Particulars in respect of Identity of the applicant');
             $table->text('request_information')->comment('Particulars of information solicited');
             $table->boolean('is_info_given')->comment('Has the information been provided earlier?');
             $table->boolean('info_by_authority')->comment('Is this information not made available by the Public authority?');

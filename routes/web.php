@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RtiController;
+use App\Http\Controllers\AjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     Route::resource('/permission', PermissionController::class);
     Route::post('/permission/assign', [PermissionController::class, 'permissionToRoll'])->name('permission.assign');
     Route::resource('/roles', RolesController::class);
-    Route::resource('/rti', RtiController::class);
+    Route::resource('/rti', RtiController::class)->except(['edit', 'update', 'destroy']);
+    Route::get('/rti/{id}/status', [RtiController::class, 'statusUpdate'])->name('rti.status');
+    Route::get('/rti/{id}/respond', [RtiController::class, 'respond'])->name('rti.respond.index');
+    Route::post('/rti/{id}/respond', [RtiController::class, 'respond'])->name('rti.respond.store');
 });
+
+// Ajax Calls
+Route::post('/ajax/pincode', [AjaxController::class, 'pincode']);

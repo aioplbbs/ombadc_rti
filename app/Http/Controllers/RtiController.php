@@ -3,10 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RtiRequest;
+use App\Jobs\SendRtiResponseJob;
 use App\Models\Rti;
+use App\Models\Respond;
 
 class RtiController extends Controller
 {
+    public function __construct()
+    {
+        // Protect entire controller
+        $this->middleware('permission:view rti')->only(['index']);
+        $this->middleware('permission:create rti')->only(['create', 'store']);
+        $this->middleware('permission:update rti')->only(['edit', 'update', 'statusUpdate']);
+        $this->middleware('permission:delete rti')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,13 +46,28 @@ class RtiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RtiRequest $request)
     {
-        $request->validate([
-            'name'  => 'required|regex:/^[A-Za-z\s]+$/|max:20',
-            'guard_name' => 'required|regex:/^[A-Za-z]+$/|max:10',
-        ]);
-        $data = [];
+        $data = $request->all();
+        $data["permanent_address"] = [
+            "address1" => $request['address1'],
+            "address2" => $request['address2'],
+            "city" => $request['city'],
+            "state" => $request['state'],
+            "country" => "INDIA",
+            "pincode" => $request['pincode'],
+        ];
+        $data["request_information"] = [
+            "subject" => $data['subject'],
+            "period_from" => $data['period_from'],
+            "period_to" => $data['period_to'],
+            "description" => htmlspecialchars(strip_tags($data['description'])),
+        ];
+        $data['concent'] = [
+            "place" => $data["place"],
+            "date" => $data['date']
+        ];
+        $data['user_id'] = auth()->user()->id;
         $rti = new Rti($data);
         $rti->save();
         return redirect()->route('rti.index')->with('success', 'RTI Applied successfully');
@@ -54,7 +81,8 @@ class RtiController extends Controller
      */
     public function show($id)
     {
-        //
+        $rti = Rti::find($id);
+        return view('rti.show', compact('rti'));
     }
 
     /**
@@ -77,15 +105,7 @@ class RtiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'  => 'required|regex:/^[A-Za-z\s]+$/|max:20',
-            'guard_name' => 'required|regex:/^[A-Za-z]+$/|max:10',
-        ]);
-        $role = Role::find($id);
-        $role->name = $request->name;
-        $role->guard_name = $request->guard_name;
-        $role->update();
-        return redirect()->back()->with('success', 'Role Update successfully');
+        
     }
 
     /**
@@ -99,5 +119,34 @@ class RtiController extends Controller
         $role = Role::find($id);
         $role->delete();
         return redirect()->back()->with('success', 'Role Deleted successfully');
+    }
+
+    public function statusUpdate($id, Request $request)
+    {
+        $rti = Rti::find($id);
+        $rti->status = $request->status;
+        $rti->update();
+        $msg = 'RTI Successfully '.$request->status;
+        return redirect()->route('rti.index')->with('success', $msg);
+    }
+
+    public function respond($id, Request $request)
+    {
+        $rti = Rti::findOrFail($id);
+
+        if ($request->isMethod('post')) {
+            // dd($request->all());
+            $data = $request->all();
+            $data['rti_id'] = $rti->id;
+            $respond = new Respond($data);
+            $respond->save();
+            $rti->status = "Responded";
+            $rti->update();
+            SendRtiResponseJob::dispatch($respond)->delay(now()->addMinute());
+            $msg = "Response is sent to ".$rti->full_name;
+            return redirect()->route('rti.index')->with('success', $msg);
+        }
+
+        return view('rti.respond', compact('rti'));
     }
 }
