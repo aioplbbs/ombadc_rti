@@ -46,11 +46,11 @@ class SetupController extends Controller
 
             File::put($envPath, $env);
 
+            Artisan::call('key:generate');
             Artisan::call('config:clear');
             Artisan::call('config:cache');
             Artisan::call('migrate', ['--force' => true]);
             Artisan::call('db:seed', ['--force' => true]);
-            Artisan::call('key:generate');
         }
 
         return redirect()->back()->with('success', 'Environment file updated successfully!');
