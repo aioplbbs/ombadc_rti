@@ -32,6 +32,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])
     Route::resource('/roles', RolesController::class);
     Route::resource('/rti', RtiController::class)->except(['edit', 'update', 'destroy']);
     Route::get('/rti/{id}/status', [RtiController::class, 'statusUpdate'])->name('rti.status');
+    Route::get('/rti/{id}/document', [RtiController::class, 'document'])->name('rti.document.index');
+    Route::post('/rti/{id}/document', [RtiController::class, 'document'])->name('rti.document.store');
     Route::get('/rti/{id}/respond', [RtiController::class, 'respond'])->name('rti.respond.index');
     Route::post('/rti/{id}/respond', [RtiController::class, 'respond'])->name('rti.respond.store');
 });

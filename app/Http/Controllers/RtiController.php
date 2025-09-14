@@ -14,7 +14,7 @@ class RtiController extends Controller
     {
         // Protect entire controller
         $this->middleware('permission:view rti')->only(['index']);
-        $this->middleware('permission:create rti')->only(['create', 'store']);
+        $this->middleware('permission:create rti')->only(['create', 'store', 'document']);
         $this->middleware('permission:update rti')->only(['edit', 'update', 'statusUpdate']);
         $this->middleware('permission:delete rti')->only(['destroy']);
     }
@@ -70,7 +70,7 @@ class RtiController extends Controller
         $data['user_id'] = auth()->user()->id;
         $rti = new Rti($data);
         $rti->save();
-        return redirect()->route('rti.index')->with('success', 'RTI Applied successfully');
+        return redirect()->route('rti.document.index', ['id'=>$rti->id])->with('success', 'RTI Applied successfully');
     }
 
     /**
@@ -82,43 +82,11 @@ class RtiController extends Controller
     public function show($id)
     {
         $rti = Rti::find($id);
+        if(!in_array($rti->status, ["Approve", "Reject", "Responded", "In Process"])){
+            $rti->status = "In Process";
+            $rti->update();
+        }
         return view('rti.show', compact('rti'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $role = Role::find($id);
-        $role->delete();
-        return redirect()->back()->with('success', 'Role Deleted successfully');
     }
 
     public function statusUpdate($id, Request $request)
@@ -135,7 +103,6 @@ class RtiController extends Controller
         $rti = Rti::findOrFail($id);
 
         if ($request->isMethod('post')) {
-            // dd($request->all());
             $data = $request->all();
             $data['rti_id'] = $rti->id;
             $respond = new Respond($data);
@@ -148,5 +115,36 @@ class RtiController extends Controller
         }
 
         return view('rti.respond', compact('rti'));
+    }
+
+    public function document($id, Request $request)
+    {
+        $rti = Rti::findOrFail($id);
+
+        if ($request->isMethod('post')) {
+
+            $request->validate([
+                'identity' => 'required|image|max:2048',
+                'challan' => 'required|image|max:2048',
+            ]);
+
+            // Store in Spatie Media Library
+            if ($request->hasFile('identity')) {
+                $rti->addMediaFromRequest('identity')
+                    ->toMediaCollection('identity_documents');
+            }
+
+            if ($request->hasFile('challan')) {
+                $rti->addMediaFromRequest('challan')
+                    ->toMediaCollection('challan_documents');
+            }
+
+            $rti->status = "Submitted";
+            $rti->update();
+            
+            return redirect()->route('rti.index')->with('success', "Document Uploaded Successfully.");
+        }
+
+        return view('rti.document', compact('rti'));
     }
 }

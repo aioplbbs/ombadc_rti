@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Rti extends Model
+class Rti extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = ["user_id", "full_name", "gardian_type", "identity", "gardian_name", "permanent_address", "request_information", "is_info_given", "info_by_authority", "application_fee", "application_fee_challan", "is_bpl", "concent"];
 
@@ -17,6 +19,12 @@ class Rti extends Model
         "request_information" => 'array',
         "concent" => 'array'
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('identity_documents');
+        $this->addMediaCollection('challan_documents');
+    }
 
     public function user()
     {
