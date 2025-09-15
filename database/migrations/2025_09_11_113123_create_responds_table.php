@@ -18,7 +18,6 @@ class CreateRespondsTable extends Migration
             $table->integer('rti_id')->unsigned();
             $table->string('subject', 180)->nullable();
             $table->text('message')->nullable();
-            $table->text('attachments')->nullable();
             $table->timestamps();
         });
     }

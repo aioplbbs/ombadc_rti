@@ -1,5 +1,4 @@
 <x-guest-layout>
-
     <div class="auth-bg d-flex min-vh-100 justify-content-center align-items-center">
         <div class="row g-0 justify-content-center w-100 m-xxl-5 px-xxl-4 m-3">
             <div class="col-xl-4 col-lg-5 col-md-6">
@@ -18,8 +17,8 @@
                     <form action="{{ route('login') }}" method="post" class="text-start mb-3">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label" for="example-email">Email</label>
-                            <input type="email" id="example-email" name="email" class="form-control" placeholder="Enter your email">
+                            <label class="form-label" for="example-email">Email / Mobile</label>
+                            <input type="text" id="example-email" name="email" class="form-control" placeholder="Enter your Email or Mobile No.">
                         </div>
 
                         <div class="mb-3">
@@ -33,13 +32,19 @@
                                 <label class="form-check-label" for="checkbox-signin">Remember me</label>
                             </div>
 
-                            <a href="#" class="text-muted border-bottom border-dashed">Forget Password</a>
+                            <a href="{{route('password.request')}}" class="text-muted border-bottom border-dashed">Forget Password</a>
                         </div>
 
                         <div class="d-grid">
                             <button class="btn btn-primary fw-semibold" type="submit">Login</button>
                         </div>
                     </form>
+
+                    <p>OR</p>
+
+                    <div class="d-grid mb-3">
+                        <a href="{{route('register')}}" class="btn btn-primary fw-semibold">Register</a>
+                    </div>
 
                     <p class="mt-auto mb-0">
                         <script>document.write(new Date().getFullYear())</script> © <a href="https://allindiaonline.in" target="_blank">All India Online Pvt. Ltd.</a>

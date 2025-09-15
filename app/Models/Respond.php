@@ -4,16 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Respond extends Model
+class Respond extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['rti_id', 'subject', 'message', 'attachments'];
+    protected $fillable = ['rti_id', 'subject', 'message'];
 
-    protected $casts = [
-        "attachments" => 'array'
-    ];
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('mail_attachment');
+    }
 
     public function rti()
     {

@@ -31,6 +31,11 @@ class Rti extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function responds()
+    {
+        return $this->hasMany(Respond::class, 'rti_id');
+    }
+
     public function getFullAddressAttribute()
     {
         $address = $this->permanent_address;

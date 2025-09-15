@@ -31,9 +31,11 @@ class RtiRespondMail extends Mailable
     public function build()
     {
         $email = $this->subject($this->respond->subject)->view('emails.rti-response');
-        if(!empty($this->respond->attachments)){
-            foreach ($this->respond->attachments as $key => $value) {
-                $email->attach(storage_path('app/' . $value));
+        if ($this->respond->relationLoaded('media') || $this->respond->media()->exists()) {
+            foreach ($this->respond->getMedia('mail_attachment') as $media) {
+                $email->attachData(file_get_contents($media->getUrl()), $media->file_name, [
+                    'mime' => $media->mime_type,
+                ]);
             }
         }
         return $email;

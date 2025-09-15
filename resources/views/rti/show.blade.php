@@ -26,6 +26,18 @@
                 <p><b>Permanent Address</b>: {{implode(", ", array_filter($rti->permanent_address))}}</p>
                 <h5>Concent</h5>
                 <p><b>Place</b>: {{$rti->concent['place']}}, <b>Date</b>: {{$rti->concent['date']}}</p>
+
+                @if(!empty($rti->responds))
+                @foreach($rti->responds as $value)
+                <div class="bg-gray">
+                    <h3>{{$value->subject}}</h3>
+                    <p>{{$value->message}}</p>
+                    @foreach($value->getMedia('mail_attachment') as $media)
+                    <p>{{$media->getPath()}}</p>
+                    @endforeach
+                </div>
+                @endforeach
+                @endif
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center">
                         @can('update rti')

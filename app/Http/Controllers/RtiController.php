@@ -8,12 +8,15 @@ use App\Jobs\SendRtiResponseJob;
 use App\Models\Rti;
 use App\Models\Respond;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RtiRespondMail;
+
 class RtiController extends Controller
 {
     public function __construct()
     {
         // Protect entire controller
-        $this->middleware('permission:view rti')->only(['index']);
+        $this->middleware('permission:view rti')->only(['index', 'show']);
         $this->middleware('permission:create rti')->only(['create', 'store', 'document']);
         $this->middleware('permission:update rti')->only(['edit', 'update', 'statusUpdate']);
         $this->middleware('permission:delete rti')->only(['destroy']);
@@ -26,7 +29,11 @@ class RtiController extends Controller
      */
     public function index(Request $request)
     {
-        $rti = Rti::paginate(20);
+        if(auth()->user()->hasRole('Consumer')){
+            $rti = Rti::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->paginate(20);
+        }else{
+            $rti = Rti::orderBy('id', 'desc')->paginate(20);
+        }
         return view('rti.index', compact('rti'));
     }
 
@@ -82,7 +89,7 @@ class RtiController extends Controller
     public function show($id)
     {
         $rti = Rti::find($id);
-        if(!in_array($rti->status, ["Approve", "Reject", "Responded", "In Process"])){
+        if(!in_array($rti->status, ["Approve", "Reject", "Responded", "In Process"]) && auth()->user()->hasRole(['Admin', 'Super Admin'])){
             $rti->status = "In Process";
             $rti->update();
         }
@@ -103,12 +110,28 @@ class RtiController extends Controller
         $rti = Rti::findOrFail($id);
 
         if ($request->isMethod('post')) {
+            $request->validate([
+                'subject' => 'required',
+                'message' => 'nullable|string',
+                'mail_type' => 'required|in:mail,final',
+                'attachments'   => 'array',
+                'attachments.*' => 'mimes:pdf|max:5120', // 5MB max
+            ]);
+
             $data = $request->all();
             $data['rti_id'] = $rti->id;
+            if($request->mail_type == "final"){
+                $rti->status = "Responded";
+                $rti->update();
+            }
             $respond = new Respond($data);
             $respond->save();
-            $rti->status = "Responded";
-            $rti->update();
+            if ($request->hasFile('attachments')) {
+                foreach ($request->file('attachments') as $file) {
+                    $respond->addMedia($file)
+                        ->toMediaCollection('mail_attachment');
+                }
+            }
             SendRtiResponseJob::dispatch($respond)->delay(now()->addMinute());
             $msg = "Response is sent to ".$rti->full_name;
             return redirect()->route('rti.index')->with('success', $msg);

@@ -1,36 +1,41 @@
 <x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+    <div class="auth-bg d-flex min-vh-100 justify-content-center align-items-center">
+        <div class="row g-0 justify-content-center w-100 m-xxl-5 px-xxl-4 m-3">
+            <div class="col-xl-4 col-lg-5 col-md-6">
+                <div class="card overflow-hidden text-center h-100 p-xxl-4 p-3 mb-0">
+                    
+                    <img src="{{asset('logo.png')}}" alt="" style="width: 100px;margin: auto;">
 
-        <x-jet-validation-errors class="mb-4" />
+                    <h4 class="fw-semibold mb-2 mt-2 fs-18">All India Online Pvt. Ltd.</h4>
 
-        <form method="POST" action="{{ route('password.update') }}">
-            @csrf
+                    <form action="{{ route('password.update') }}" method="post" class="text-start mb-3">
+                        @csrf
+                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                        <div class="mb-3">
+                            <label class="form-label" for="example-email">Email</label>
+                            <input type="email" id="example-email" name="email" value="{{old('email', $request->email)}}" required autofocus class="form-control" placeholder="Enter your email">
+                        </div>
 
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                        <div class="mb-3">
+                            <label class="form-label" for="example-password">Password</label>
+                            <input type="password" id="example-password" name="password" class="form-control" placeholder="Enter your password">
+                        </div>
 
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+                        <div class="mb-3">
+                            <label class="form-label" for="confirm-password">{{ __('Confirm Password') }}</label>
+                            <input type="password" id="confirm-password" name="password_confirmation" class="form-control" placeholder="Confirm Password">
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-primary fw-semibold" type="submit">{{ __('Reset Password') }}</button>
+                        </div>
+                    </form>
+
+                    <p class="mt-auto mb-0">
+                        <script>document.write(new Date().getFullYear())</script> © <a href="https://allindiaonline.in" target="_blank">All India Online Pvt. Ltd.</a>
+                    </p>
+                </div>
             </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Reset Password') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
+        </div>
+    </div>
 </x-guest-layout>

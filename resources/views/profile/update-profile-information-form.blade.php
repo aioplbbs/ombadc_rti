@@ -90,6 +90,15 @@
                 @endif
             </div>
 
+            <!-- Mobile -->
+            <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile</label>
+                <input id="mobile" type="text" class="form-control @error('state.mobile') is-invalid @enderror" wire:model.defer="state.mobile" autocomplete="mobile">
+                @error('state.mobile')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <!-- Action Buttons -->
             <div class="d-flex align-items-center">
                 @if (session()->has('message'))

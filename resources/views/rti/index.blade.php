@@ -29,8 +29,12 @@
                                 <td>{{$value->request_information['subject']}}</td>
                                 <td>{{$value->status}}</td>
                                 <td>
+                                    @can('view rti')
                                     <a href="{{route('rti.show', $value->id)}}" class="fs-20 p-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View RTI"> <i class="text-primary ri-mac-line"></i></a>
+                                    @endcan
+                                    @can('update rti')
                                     <a href="{{route('rti.respond.index', $value->id)}}" class="fs-20 p-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Respond To this RTI"> <i class="text-primary ri-mail-send-fill"></i></a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

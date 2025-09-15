@@ -3,12 +3,12 @@
         <div class="row g-0 justify-content-center w-100 m-xxl-5 px-xxl-4 m-3">
             <div class="col-xl-4 col-lg-5 col-md-6">
                 <div class="card overflow-hidden text-center h-100 p-xxl-4 p-3 mb-0">
-                    <a href="index.html" class="auth-brand mb-4">
+                    <a href="#" class="auth-brand mb-4">
                         <img src="assets/images/logo-dark.png" alt="dark logo" height="26" class="logo-dark">
                         <img src="assets/images/logo.png" alt="logo light" height="26" class="logo-light">
                     </a>
 
-                    <h4 class="fw-semibold mb-2 fs-18">Welcome to Highdmin Admin</h4>
+                    <h4 class="fw-semibold mb-2 fs-18">All India Online Pvt. Ltd.</h4>
 
                     <p class="text-muted mb-4">Enter your name , email address and password to access account.</p>
 
