@@ -88,7 +88,10 @@ class RtiController extends Controller
      */
     public function show($id)
     {
-        $rti = Rti::find($id);
+        $rti = Rti::where('user_id', auth()->user()->id)->find($id);
+        if(empty($rti)){
+            return redirect()->route('rti.index')->with('error', 'Your have no permission to access.');
+        }
         if(!in_array($rti->status, ["Approve", "Reject", "Responded", "In Process"]) && auth()->user()->hasRole(['Admin', 'Super Admin'])){
             $rti->status = "In Process";
             $rti->update();

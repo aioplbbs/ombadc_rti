@@ -2,7 +2,7 @@
     <div class="page-container">
         <div class="card">
             <div class="card-header border-bottom border-dashed d-flex align-items-center justify-content-between">
-                <h4 class="header-title">Accounts List</h4>
+                <h4 class="header-title">RTI Requested</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive-sm">
@@ -27,7 +27,29 @@
                                 <td>{{$value->full_name}}</td>
                                 <td>{{$value->full_address}}</td>
                                 <td>{{$value->request_information['subject']}}</td>
-                                <td>{{$value->status}}</td>
+                                <!-- <td>{{$value->status}}</td> -->
+                                <td>
+                                    @switch($value->status)
+                                        @case('Documents')
+                                        <span class="badge bg-secondary">{{$value->status}}</span>
+                                        @break
+                                        @case('Submitted')
+                                        <span class="badge bg-success">{{$value->status}}</span>
+                                        @break
+                                        @case('In Process')
+                                        <span class="badge bg-secondary">{{$value->status}}</span>
+                                        @break
+                                        @case('Approve')
+                                        <span class="badge bg-success">{{$value->status}}</span>
+                                        @break
+                                        @case('Reject')
+                                        <span class="badge bg-danger">{{$value->status}}</span>
+                                        @break
+                                        @case('Responded')
+                                        <span class="badge bg-secondary">{{$value->status}}</span>
+                                        @break
+                                    @endswitch
+                                </td>
                                 <td>
                                     @can('view rti')
                                     <a href="{{route('rti.show', $value->id)}}" class="fs-20 p-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View RTI"> <i class="text-primary ri-mac-line"></i></a>

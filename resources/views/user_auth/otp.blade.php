@@ -60,29 +60,16 @@
                         
                     @endif
 
-                    <form action="{{ route('login') }}" method="post" class="text-start mb-3">
+                    <form action="{{ route('user.verify') }}" method="post" class="text-start mb-3">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label" for="example-email">Email / Mobile</label>
-                            <input type="text" id="example-email" name="email" class="form-control" placeholder="Enter your Email or Mobile No.">
+                            <label class="form-label" for="example-email">OTP</label>
+                            <input type="text" id="example-email" name="otp" class="form-control" placeholder="Enter OTP">
                         </div>
+                        <a href="{{route('user.resend_otp')}}" class="mb-3">Resend OTP</a>
 
-                        <div class="mb-3">
-                            <label class="form-label" for="example-password">Password</label>
-                            <input type="password" id="example-password" name="password" class="form-control" placeholder="Enter your password">
-                        </div>
-
-                        <div class="d-flex justify-content-between mb-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox-signin">
-                                <label class="form-check-label" for="checkbox-signin">Remember me</label>
-                            </div>
-
-                            <a href="{{route('password.request')}}" class="text-muted border-bottom border-dashed">Forget Password</a>
-                        </div>
-
-                        <div class="d-grid">
-                            <button class="btn btn-success fw-semibold " type="submit">Login</button>
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-success fw-semibold " type="submit">Submit</button>
                         </div>
                     </form>
 

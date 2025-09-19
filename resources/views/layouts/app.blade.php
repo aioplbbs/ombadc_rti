@@ -19,10 +19,11 @@
         <link href="{{asset('assets/css/vendor.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- App css -->
-        <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
+        <link href="{{asset('assets/css/app.min.css')}}?v=2.2" rel="stylesheet" type="text/css" id="app-style" />
 
         <!-- Icons css -->
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+         <link href="{{asset('assets/css/ombadc.css')}}?v=2.2" rel="stylesheet" type="text/css" />
 
         <!-- Theme Config Js -->
         <script src="{{asset('assets/js/config.js')}}"></script>
@@ -42,10 +43,9 @@
                 <!-- Footer Start -->
                 <footer class="footer">
                     <div class="page-container">
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-6 text-center text-md-start">
                                 <script>document.write(new Date().getFullYear())</script> © AIO 
-                                <!-- <span class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">ESIR</span> -->
                             </div>
                             <div class="col-md-6">
                                 <div class="text-md-end footer-links d-none d-md-block">
@@ -54,7 +54,23 @@
                                     <a href="javascript: void(0);">Contact Us</a>
                                 </div>
                             </div>
+                        </div> -->
+
+
+                       <div class="row">
+                            <div class="col-md-6 text-center text-md-start">
+                                 © <script>document.write(new Date().getFullYear())</script> OMBADC, All Right Reserved.
+                                <!-- <span class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">ESIR</span> -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-md-end footer-links d-none d-md-block">
+                                    <a href="https://www.ombadc.in">OMBADC Homepage</a>
+                                    <!-- <a href="javascript: void(0);">Support</a> -->
+                                    <a href="https://www.ombadc.in/contact.php">Contact Us</a>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </footer>
                 <!-- end Footer -->

@@ -23,6 +23,10 @@ use App\Http\Controllers\AjaxController;
 Route::get('/', [SetupController::class, 'index']);
 Route::post('/setup', [SetupController::class, 'create'])->name('setup.init');
 Route::get('/setup/migrate', [SetupController::class, 'migrate']);
+Route::get('/user', [DashboardController::class, 'userLogin'])->name('user.login');
+Route::post('/user/process', [DashboardController::class, 'userLoginProcess'])->name('user.process');
+Route::post('/user/otp', [DashboardController::class, 'verifyOTP'])->name('user.verify');
+Route::get('/user/reotp', [DashboardController::class, 'resendOTP'])->name('user.resend_otp');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);

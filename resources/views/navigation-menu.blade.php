@@ -5,16 +5,16 @@
       <!-- Brand Logo -->
       <a href="{{url('/dashboard')}}" class="logo">
           <span class="logo-light">
-              <span class="logo-lg"><img src="{{asset('logo.png')}}" alt="logo"></span>
-              <span class="logo-sm"><img src="assets/images/logo-sm.png" alt="small logo"></span>
+              <span class="logo-lg"><img src="https://www.ombadc.in/images/logo.png" alt="logo"></span>
+              <span class="logo-sm"><img src="https://www.ombadc.in/images/logo.png" alt="small logo"></span>
           </span>
 
           <span class="logo-dark">
-              <span class="logo-lg"><img src="{{asset('logo.png')}}" alt="dark logo" style="height:80px;"></span>
-              <span class="logo-sm"><img src="assets/images/logo-sm.png" alt="small logo"></span>
+              <span class="logo-lg"><img src="https://www.ombadc.in/images/logo.png" alt="dark logo" style="height:80px;"></span>
+              <span class="logo-sm"><img src="https://www.ombadc.in/images/logo.png" alt="small logo"></span>
           </span>
       </a>
-      <p style="margin:0 25px;"><b>{{ config('app.name') }}</p>
+      <!-- <p style="margin:0 25px;"><b>{{ config('app.name') }}</p> -->
 
       <!-- Sidebar Hover Menu Toggle Button -->
       
@@ -203,7 +203,7 @@
   <div class="color-line"></div>
 
   <!-- Topbar Start -->
-  <header class="app-topbar">
+  <header class="app-topbar" style="background-color: #fecd00; margin-bottom: 20px;">
       <div class="page-container topbar-menu">
           <div class="d-flex align-items-center gap-2">
 
@@ -250,16 +250,24 @@
 
                   
               </div>
+
+              <div class="topbar-item d-none d-md-flex">
+                        
+                     <img src="https://www.ombadc.in/images/logo_black_011.png" alt="" style="width: 46rem;padding: 5px 100px 5px 0;">
+                        
+
+                        
+                    </div>
           </div>
 
           <div class="d-flex align-items-center gap-2">
 
               <!-- Light/Dark Mode Button -->
-              <div class="topbar-item d-none d-sm-flex">
+              <!-- <div class="topbar-item d-none d-sm-flex">
                   <button class="topbar-link" id="light-dark-mode" type="button">
                       <i class="ri-moon-line fs-22"></i>
                   </button>
-              </div>
+              </div> -->
 
               <!-- User Dropdown -->
               <div class="topbar-item nav-user">

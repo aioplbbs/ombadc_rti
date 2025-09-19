@@ -60,25 +60,11 @@
                         
                     @endif
 
-                    <form action="{{ route('login') }}" method="post" class="text-start mb-3">
+                    <form action="{{ route('user.process') }}" method="post" class="text-start mb-3">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label" for="example-email">Email / Mobile</label>
-                            <input type="text" id="example-email" name="email" class="form-control" placeholder="Enter your Email or Mobile No.">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="example-password">Password</label>
-                            <input type="password" id="example-password" name="password" class="form-control" placeholder="Enter your password">
-                        </div>
-
-                        <div class="d-flex justify-content-between mb-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="checkbox-signin">
-                                <label class="form-check-label" for="checkbox-signin">Remember me</label>
-                            </div>
-
-                            <a href="{{route('password.request')}}" class="text-muted border-bottom border-dashed">Forget Password</a>
+                            <label class="form-label" for="example-email">Mobile</label>
+                            <input type="text" id="example-email" name="mobile" class="form-control" placeholder="Enter your Mobile No.">
                         </div>
 
                         <div class="d-grid">

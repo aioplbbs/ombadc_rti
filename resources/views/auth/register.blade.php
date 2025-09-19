@@ -1,40 +1,100 @@
 <x-guest-layout>
+    <style>
+        .auth-bg {
+            background: url('https://www.ombadc.in/images/innerbanner/history.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .c-header-flex {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            gap: 5px;
+            border-bottom: 3px solid green;
+            padding: 0 0 10px 0;
+        }
+
+        .c-green {
+            color: green;
+        }
+
+        .btn-success {
+            background-color: green;
+            border-color: green;
+            color: white;
+        }
+
+        .c-black {
+            color: black;
+        }
+
+        .c-yellow {
+            color: #fecd00;
+        }
+    </style>
     <div class="auth-bg d-flex min-vh-100 justify-content-center align-items-center">
         <div class="row g-0 justify-content-center w-100 m-xxl-5 px-xxl-4 m-3">
             <div class="col-xl-4 col-lg-5 col-md-6">
                 <div class="card overflow-hidden text-center h-100 p-xxl-4 p-3 mb-0">
-                    <a href="#" class="auth-brand mb-4">
-                        <img src="assets/images/logo-dark.png" alt="dark logo" height="26" class="logo-dark">
-                        <img src="assets/images/logo.png" alt="logo light" height="26" class="logo-light">
-                    </a>
+                    <div class="c-header-flex">
+                        <img src="https://www.ombadc.in/images/logo.png" alt="" style="width: 100px;margin: auto;">
 
-                    <h4 class="fw-semibold mb-2 fs-18">All India Online Pvt. Ltd.</h4>
+                        <h4 class="fw-semibold mb-2 mt-2 fs-18">Odisha Mineral Bearing Areas Development Corporation</h4>
+                    </div>
 
-                    <p class="text-muted mb-4">Enter your name , email address and password to access account.</p>
+                    <!-- <p class="text-muted mb-4">Enter your name , email address and password to access account.</p> -->
+                    <h4 class="fw-bold mb-2 mt-2 fs-20 c-green">RTI Portal Registration</h4>
+
+                    @if (session('status'))
+                    <div class="mb-4 font-medium text-sm text-green-600">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                  
+                    @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger alert-dismissible d-flex align-items-center border-2 border border-danger" role="alert">
+                                    <div class="lh-1">{{ $error }}</div>
+                                </div>
+                            @endforeach
+                    @endif
 
                     <form action="{{route('register')}}" method="post" class="text-start mb-3">
                         @csrf
-                        <div class="mb-3">
-                            <label class="form-label" for="example-name">Your Name</label>
+                        <div class="mb-2">
+                            <label class="form-label" for="example-name">Full Name</label>
                             <input type="text" id="example-name" name="name" class="form-control" placeholder="Enter your name">
                         </div>
 
-                        <div class="mb-3">
+                        <!-- Removed unused React-style script for input change handling -->
+
+
+                        <div class="mb-2">
+                            <label class="form-label" for="example-mobile">Mobile No.</label>
+                            <input
+                                type="number"
+                                id="example-mobile"
+                                name="mobile"
+                                class="form-control"
+                                placeholder="Enter your mobile number">
+                        </div>
+
+                        <div class="mb-2">
                             <label class="form-label" for="example-email">Email</label>
                             <input type="email" id="example-email" name="email" class="form-control" placeholder="Enter your email">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label class="form-label" for="example-password">Password</label>
                             <input type="password" id="example-password" name="password" class="form-control" placeholder="Enter your password">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label class="form-label" for="password2">Confirm Password</label>
                             <input type="password" id="password2" name="password_confirmation" class="form-control" placeholder="Enter your password">
                         </div>
 
-                        <div class="d-flex justify-content-between mb-3">
+                        <div class="d-flex justify-content-between mb-2">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="checkbox-signin">
                                 <label class="form-check-label" for="checkbox-signin">I agree to all <a href="#!" class="link-dark text-decoration-underline">Terms & Condition</a> </label>
@@ -42,15 +102,17 @@
                         </div>
 
                         <div class="d-grid">
-                            <button class="btn btn-primary fw-semibold" type="submit">Sign Up</button>
+                            <button class="btn btn-success fw-semibold" type="submit">Sign Up</button>
                         </div>
                     </form>
 
-                    <p class="text-nuted fs-14 mb-4">Already have an account? <a href="auth-login.html" class="fw-semibold text-danger ms-1">Login !</a></p>
+                    <p class="text-muted fs-14 mb-4">Already have an account? <a href="{{route('login')}}" class="c-green">Login</a></p>
 
-                    <p class="mt-auto mb-0">
-                        <script>document.write(new Date().getFullYear())</script> © Highdmin - By <span class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">Coderthemes</span>
-                    </p>
+                    <!-- <p class="mt-auto mb-0">
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> © Highdmin - By <span class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">Coderthemes</span>
+                    </p> -->
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ class SetupController extends Controller
         if(env('SESSION_DRIVER') == "file"){
             return view('setup');
         }else{
-            return redirect('/login');
+            return redirect('/user');
         }
     }
 
