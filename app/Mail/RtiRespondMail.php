@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
 
 class RtiRespondMail extends Mailable
 {
@@ -33,7 +34,8 @@ class RtiRespondMail extends Mailable
         $email = $this->subject($this->respond->subject)->view('emails.rti-response');
         if ($this->respond->relationLoaded('media') || $this->respond->media()->exists()) {
             foreach ($this->respond->getMedia('mail_attachment') as $media) {
-                $email->attachData(file_get_contents($media->getUrl()), $media->file_name, [
+                $response = Http::get($media->getUrl());
+                $email->attachData($response->body(), $media->file_name, [
                     'mime' => $media->mime_type,
                 ]);
             }
