@@ -41,7 +41,6 @@
 
                        <h4 class="fw-bold mb-2 mt-2 fs-20 c-green">RTI Portal</h4>
 
-
                     @if (session('status'))
                     <div class="mb-4 font-medium text-sm text-green-600">
                         {{ session('status') }}
@@ -65,6 +64,10 @@
                         <div class="mb-3">
                             <label class="form-label" for="example-email">Mobile</label>
                             <input type="text" id="example-email" name="mobile" class="form-control" placeholder="Enter your Mobile No.">
+                        </div>
+
+                        <div class="mb-3">
+                            <a href="{{route('login')}}"><span class="c-green">Login with Password</span></a>
                         </div>
 
                         <div class="d-grid">

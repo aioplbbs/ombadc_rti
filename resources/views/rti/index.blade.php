@@ -51,6 +51,11 @@
                                     @endswitch
                                 </td>
                                 <td>
+                                    @if($value->status == "Documents")
+                                    @can('view rti')
+                                    <a href="{{route('rti.document.index', $value->id)}}" class="fs-20 p-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Upload Document"> <i class="text-primary ri-file-upload-line"></i></a>
+                                    @endcan
+                                    @endif
                                     @can('view rti')
                                     <a href="{{route('rti.show', $value->id)}}" class="fs-20 p-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View RTI"> <i class="text-primary ri-mac-line"></i></a>
                                     @endcan

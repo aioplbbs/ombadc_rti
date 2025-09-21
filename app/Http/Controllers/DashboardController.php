@@ -12,6 +12,9 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
+        if(auth()->user()->hasRole('Consumer')){
+            return redirect()->route('rti.index');
+        }
         return view('dashboard');
     }
 

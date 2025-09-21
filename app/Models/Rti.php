@@ -33,7 +33,7 @@ class Rti extends Model implements HasMedia
 
     public function responds()
     {
-        return $this->hasMany(Respond::class, 'rti_id');
+        return $this->hasMany(Respond::class, 'rti_id')->orderBy('id', 'desc');
     }
 
     public function getFullAddressAttribute()

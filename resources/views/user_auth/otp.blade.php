@@ -49,10 +49,7 @@
                     @endif
 
                     @if ($errors->any())
-                
                             @foreach ($errors->all() as $error)
-                              
-
                                 <div class="alert alert-danger alert-dismissible d-flex align-items-center border-2 border border-danger" role="alert"> 
                                     <div class="lh-1">{{ $error }}</div>
                                 </div>
@@ -74,7 +71,7 @@
                     </form>
 
                     <!-- <p>OR</p> -->
-                    <p>Don't have Account ? <a href="{{route('register')}}" class="c-green">Register</a></p>
+                    
 
 
                     <!-- <p class="mt-auto mb-0">

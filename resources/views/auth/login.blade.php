@@ -72,6 +72,10 @@
                             <input type="password" id="example-password" name="password" class="form-control" placeholder="Enter your password">
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label" for="example-password">Forgot your Password ? </label> <a href="{{route('user.login')}}" class="c-green">Login with OTP</a>
+                        </div>
+
                         <div class="d-flex justify-content-between mb-3">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="checkbox-signin">

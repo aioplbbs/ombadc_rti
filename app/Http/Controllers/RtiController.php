@@ -88,7 +88,11 @@ class RtiController extends Controller
      */
     public function show($id)
     {
-        $rti = Rti::where('user_id', auth()->user()->id)->find($id);
+        if(auth()->user()->hasRole(['Admin', 'Super Admin'])){
+            $rti = Rti::find($id);
+        }else{
+            $rti = Rti::where('user_id', auth()->user()->id)->find($id);
+        }
         if(empty($rti)){
             return redirect()->route('rti.index')->with('error', 'Your have no permission to access.');
         }
@@ -145,7 +149,7 @@ class RtiController extends Controller
 
     public function document($id, Request $request)
     {
-        $rti = Rti::findOrFail($id);
+        $rti = Rti::where('user_id', auth()->user()->id)->findOrFail($id);
 
         if ($request->isMethod('post')) {
 

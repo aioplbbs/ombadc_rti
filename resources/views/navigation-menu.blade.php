@@ -28,7 +28,7 @@
 
           <!--- Sidenav Menu -->
           <ul class="side-nav">
-              <li class="side-nav-title">Navigation</li>
+              <!-- <li class="side-nav-title">Navigation</li> -->
 
               <li class="side-nav-item">
                   <a href="{{url('/dashboard')}}" class="side-nav-link">
@@ -55,7 +55,7 @@
                 </li>
                 @endcan
 
-              <li class="side-nav-title">Admin Section</li>
+              <!-- <li class="side-nav-title">Admin Section</li> -->
 
               @can('view user')
               <li class="side-nav-item">

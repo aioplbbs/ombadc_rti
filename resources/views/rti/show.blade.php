@@ -130,7 +130,7 @@
                 @foreach($rti->responds as $value)
                 <div class="bg-gray">
                     <div class="respond-date">
-                        <i class="far fa-clock"></i> April 18, 2023 at 10:30 AM
+                        <i class="far fa-clock"></i> {{date("F d, Y", strtotime($value->created_at))}} at {{date("H:i A", strtotime($value->created_at))}}
                     </div>
                     <h5>{{$value->subject}}</h5>
                     <p>{{$value->message}}</p>
@@ -139,7 +139,7 @@
                         @foreach($value->getMedia('mail_attachment') as $media)
                         <i class="ri-download-line fs-32 lh-1"></i>
                         <span>Attachments</span>
-                        <a href="{{$media->getPath()}}" class="btn btn-sm btn-success ms-auto" download>Download</a>
+                        <a href="{{$media->getUrl()}}" target="_blank" class="btn btn-sm btn-success ms-auto" download>Download</a>
 
                         @endforeach
                     </div>
